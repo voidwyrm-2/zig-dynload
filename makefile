@@ -14,7 +14,10 @@ build-cc:
 	rm -rf cclib.so
 	g++ -shared -fPIC -o cclib.so lib.cc
 
-all: build-c build-cc build-zig
+# -ofmt=elf doesn't work
+# -ofmt=macho doesn't work
+build-libzig:
+	rm -rf *.o *.dynlib
+	zig build-lib -lc -fPIC -dynamic -isystem -ofmt=elf --name zlib lib.zig # mmm yes I love magical flags
 
-run: all
-	./$(PROGRAM) lib.so
+all: build-c build-cc build-zig

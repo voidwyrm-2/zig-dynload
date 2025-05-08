@@ -15,6 +15,8 @@ pub fn main() !u8 {
     var bw = std.io.bufferedWriter(stdout_file);
     const stdout = bw.writer();
 
+    defer bw.flush() catch {}; // so it flushes no matter what
+
     const args = try std.process.argsAlloc(allocator);
     defer std.process.argsFree(allocator, args);
 
@@ -70,6 +72,5 @@ pub fn main() !u8 {
         return 1;
     }
 
-    try bw.flush();
     return 0;
 }

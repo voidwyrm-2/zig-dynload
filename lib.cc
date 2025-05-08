@@ -16,7 +16,7 @@ typedef struct {
   void (*out)(int);
 } obj_t;
 
-extern "C" void call_struct(obj_t obj) { obj.out(20); }
+extern "C" void call_struct(obj_t obj) { obj.out(22); }
 
 extern "C" class Test {
 public:
